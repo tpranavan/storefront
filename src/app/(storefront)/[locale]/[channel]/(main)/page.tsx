@@ -6,7 +6,7 @@ import { resolveChannelCurrency } from "@/lib/channels/resolve-channel-currency"
 import { buildPolicyLabelValues } from "@/lib/content";
 import { formatContentLabel } from "@/lib/content/format-label";
 import { getStorefrontContent } from "@/lib/content/server";
-import { PaperSignEditorialPlaceholder } from "@/ui/components/shared/paper-sign";
+import { Logo } from "@/ui/components/shared/logo";
 import { CategoryTileGrid, type CategoryTile } from "@/ui/sections/category-tile-grid/category-tile-grid";
 import { EditorialHero } from "@/ui/sections/editorial-hero/editorial-hero";
 import { FeaturedCollectionSection } from "@/ui/sections/featured-collection-section/featured-collection-section";
@@ -125,7 +125,11 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
 					image={heroImage?.url}
 					imageAlt={heroImage?.alt ?? ""}
 					primaryCta={{ label: hero.primaryCtaLabel, href: "/products" }}
-					placeholder={<PaperSignEditorialPlaceholder />}
+					placeholder={
+						<div className="flex h-full w-full items-center justify-center">
+							<Logo className="h-10 w-auto opacity-30" />
+						</div>
+					}
 				/>
 			)}
 
@@ -156,7 +160,11 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
 				imageAlt={editorial.image ? editorial.imageAlt : (editorialFallbackImage?.alt ?? "")}
 				imageFit={editorial.image ? "cover" : "contain"}
 				imagePosition={editorial.imagePosition}
-				placeholder={<PaperSignEditorialPlaceholder />}
+				placeholder={
+					<div className="flex h-full w-full items-center justify-center">
+						<Logo className="h-10 w-auto opacity-30" />
+					</div>
+				}
 				cta={{ label: editorial.ctaLabel, href: "/collections" }}
 			/>
 
