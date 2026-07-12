@@ -1,6 +1,6 @@
 # Storefront content — Saleor Configurator
 
-Deploys **Storefront — \*** model types, content attributes, and seed models for Paper's `CONTENT_PROVIDER=saleor` layer.
+Deploys **Storefront — \*** model types, content attributes, and seed models for BOTO's `CONTENT_PROVIDER=saleor` layer.
 
 ## Copy ownership (source of truth)
 

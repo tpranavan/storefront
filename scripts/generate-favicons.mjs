@@ -51,3 +51,24 @@ for (const spec of sizes) {
 }
 
 await renderFaviconIco();
+
+const ogWidth = 1200;
+const ogHeight = 630;
+const ogLogo = await sharp(path.join(publicDir, "logo.png"))
+	.resize(480, Math.round(480 * (135 / 748)), { fit: "inside" })
+	.png()
+	.toBuffer();
+
+await sharp({
+	create: {
+		width: ogWidth,
+		height: ogHeight,
+		channels: 4,
+		background: "#FAF9F7",
+	},
+})
+	.composite([{ input: ogLogo, gravity: "centre" }])
+	.png()
+	.toFile(path.join(publicDir, "opengraph-image.png"));
+
+console.log("wrote opengraph-image.png");
