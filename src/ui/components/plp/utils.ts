@@ -7,7 +7,7 @@ import { calculateDiscountPercent, hasDiscount, hasDiscountInPriceRange } from "
 import { buildStorefrontPath } from "@/lib/storefront-path";
 import { pickTranslatedName } from "@/lib/saleor-translations";
 import { isBestseller } from "@/lib/catalog/product-flags";
-import { normalizeSaleorMediaUrl, resolveProductThumbnailUrl } from "@/lib/images";
+import { resolveProductThumbnailUrl } from "@/lib/images";
 
 /**
  * Extract colors from product variants
