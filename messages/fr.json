@@ -575,17 +575,17 @@
 		},
 		"gateways": {
 			"noneTitle": "Aucune passerelle de paiement configurée",
-			"noneBody": "Pour accepter les paiements, installez une application de paiement (comme Saleor Dummy Payment pour les tests, ou Stripe/Adyen en production) depuis le Saleor Dashboard.",
+			"noneBody": "Pour accepter les paiements, installez une application de paiement (comme BOTO Dummy Payment pour les tests, ou Stripe/Adyen en production) depuis le BOTO Dashboard.",
 			"unsupportedTitle": "Passerelle de paiement non prise en charge",
 			"unsupportedList": "Ce paiement ne prend pas en charge la ou les passerelles disponibles : {gateways}.",
 			"unsupportedEmpty": "Aucune passerelle de paiement prise en charge n'est disponible pour ce paiement.",
 			"dummyMissingTitle": "Dummy Payment non disponible pour ce paiement",
-			"dummyMissingBody": "L'application Dummy Payment est installée, mais n'est pas disponible pour ce paiement. Dans le Saleor Dashboard, vérifiez que l'application est active, que les webhooks sont livrés avec succès et que la devise du paiement est prise en charge (USD pour l'application hébergée).",
+			"dummyMissingBody": "L'application Dummy Payment est installée, mais n'est pas disponible pour ce paiement. Dans le BOTO Dashboard, vérifiez que l'application est active, que les webhooks sont livrés avec succès et que la devise du paiement est prise en charge (USD pour l'application hébergée).",
 			"noGatewayConfigured": "Aucune passerelle de paiement configurée. Veuillez contacter le support ou configurer une application de paiement dans Saleor.",
 			"stripeUseCardForm": "Le paiement Stripe se fait via le formulaire de carte. Finalisez le paiement dans la section Stripe ci-dessus.",
 			"paymentFailed": "Paiement échoué",
 			"paymentTryAgain": "Paiement échoué. Veuillez réessayer.",
-			"paymentWebhookFailed": "Échec du webhook de l'application de paiement. Dans Saleor Dashboard → Apps → Dummy Payment App, vérifiez que les livraisons de webhooks réussissent.",
+			"paymentWebhookFailed": "Échec du webhook de l'application de paiement. Dans BOTO Dashboard → Apps → Dummy Payment App, vérifiez que les livraisons de webhooks réussissent.",
 			"paymentInitFailed": "Le paiement n'a pas pu être initialisé. Vérifiez que l'application de paiement fonctionne dans Saleor."
 		}
 	}

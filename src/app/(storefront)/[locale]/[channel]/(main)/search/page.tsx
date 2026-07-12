@@ -14,7 +14,7 @@ import { buildStorefrontPath } from "@/lib/storefront-path";
 
 /**
  * Search results are query-dependent and thin — keep them out of the index.
- * Title falls back to the brand template (`%s | Saleor Store`).
+ * Title falls back to the brand template (`%s | BOTO`).
  */
 export async function generateMetadata(props: {
 	params: Promise<{ locale: string; channel: string }>;

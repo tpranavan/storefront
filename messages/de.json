@@ -532,7 +532,7 @@
 			"channelUnresolved": "Checkout-Kanal konnte nach der Zahlung nicht ermittelt werden. Bitte kontaktieren Sie den Support.",
 			"unexpectedError": "Beim Abschließen Ihrer Zahlung ist ein unerwarteter Fehler aufgetreten.",
 			"stripeConfigFailed": "Stripe-Gateway-Konfiguration fehlgeschlagen",
-			"stripeKeyMissing": "Stripe-Veröffentlichungsschlüssel fehlt. Überprüfen Sie die Stripe-App-Konfiguration im Saleor Dashboard.",
+			"stripeKeyMissing": "Stripe-Veröffentlichungsschlüssel fehlt. Überprüfen Sie die Stripe-App-Konfiguration im BOTO Dashboard.",
 			"dummyGateway": "Testzahlung",
 			"failed": "Zahlung fehlgeschlagen",
 			"interruptedBeforeCharge": "Die Zahlung wurde unterbrochen, bevor Ihnen etwas berechnet wurde. Sie können es sicher erneut versuchen.",
@@ -575,18 +575,18 @@
 		},
 		"gateways": {
 			"noneTitle": "Kein Zahlungsgateway konfiguriert",
-			"noneBody": "Um Zahlungen anzunehmen, installieren Sie eine Zahlungs-App (z. B. Saleor Dummy Payment zum Testen oder Stripe/Adyen für den Produktivbetrieb) im Saleor Dashboard.",
+			"noneBody": "Um Zahlungen anzunehmen, installieren Sie eine Zahlungs-App (z. B. BOTO Dummy Payment zum Testen oder Stripe/Adyen für den Produktivbetrieb) im BOTO Dashboard.",
 			"unsupportedTitle": "Nicht unterstütztes Zahlungsgateway",
 			"unsupportedList": "Dieser Checkout unterstützt die verfügbaren Zahlungsgateways nicht: {gateways}.",
 			"unsupportedEmpty": "Für diesen Checkout ist kein unterstütztes Zahlungsgateway verfügbar.",
 			"dummyMissingTitle": "Dummy Payment in diesem Checkout nicht verfügbar",
-			"dummyMissingBody": "Die Dummy Payment App ist installiert, aber für diesen Checkout nicht verfügbar. Prüfen Sie im Saleor Dashboard, ob die App aktiv ist, Webhooks erfolgreich zugestellt werden und die Checkout-Währung unterstützt wird (USD für die gehostete App).",
-			"noGatewayConfigured": "Kein Zahlungsgateway konfiguriert. Bitte kontaktieren Sie den Support oder konfigurieren Sie eine Zahlungs-App in Saleor.",
+			"dummyMissingBody": "Die Dummy Payment App ist installiert, aber für diesen Checkout nicht verfügbar. Prüfen Sie im BOTO Dashboard, ob die App aktiv ist, Webhooks erfolgreich zugestellt werden und die Checkout-Währung unterstützt wird (USD für die gehostete App).",
+			"noGatewayConfigured": "Kein Zahlungsgateway konfiguriert. Bitte kontaktieren Sie den Support oder konfigurieren Sie eine Zahlungs-App in BOTO.",
 			"stripeUseCardForm": "Die Stripe-Zahlung erfolgt über das Kartenformular. Schließen Sie die Zahlung im Stripe-Bereich oben ab.",
 			"paymentFailed": "Zahlung fehlgeschlagen",
 			"paymentTryAgain": "Zahlung fehlgeschlagen. Bitte versuchen Sie es erneut.",
-			"paymentWebhookFailed": "Webhook der Zahlungs-App fehlgeschlagen. Prüfen Sie im Saleor Dashboard → Apps → Dummy Payment App, ob Webhook-Zustellungen erfolgreich sind.",
-			"paymentInitFailed": "Zahlung konnte nicht initialisiert werden. Prüfen Sie, ob die Zahlungs-App in Saleor läuft."
+			"paymentWebhookFailed": "Webhook der Zahlungs-App fehlgeschlagen. Prüfen Sie im BOTO Dashboard → Apps → Dummy Payment App, ob Webhook-Zustellungen erfolgreich sind.",
+			"paymentInitFailed": "Zahlung konnte nicht initialisiert werden. Prüfen Sie, ob die Zahlungs-App in BOTO läuft."
 		}
 	}
 }

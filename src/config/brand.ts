@@ -15,28 +15,28 @@
 
 export const brandConfig = {
 	/** Site name used in titles, metadata, and headers */
-	siteName: "Saleor Store",
+	siteName: "BOTO",
 
 	/** Legal entity name for copyright notices */
-	copyrightHolder: "Saleor Demo Store",
+	copyrightHolder: "BOTO",
 
 	/** Organization name for structured data (JSON-LD) */
-	organizationName: "Saleor Store",
+	organizationName: "BOTO",
 
 	/** Default brand name for products without a brand */
-	defaultBrand: "Saleor Store",
+	defaultBrand: "BOTO",
 
 	/** Tagline/description for the store */
 	tagline: "Premium products with exceptional quality. Discover our curated collection.",
 
 	/** Homepage meta description */
-	description: "Starter pack for building performant e-commerce experiences with Saleor.",
+	description: "Premium products with exceptional quality. Discover our curated collection.",
 
 	/** Logo aria-label for accessibility */
-	logoAriaLabel: "Store",
+	logoAriaLabel: "BOTO",
 
 	/** Title template - %s will be replaced with page title */
-	titleTemplate: "%s | Saleor Store",
+	titleTemplate: "%s | BOTO",
 
 	/** Social media handles */
 	social: {

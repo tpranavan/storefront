@@ -1,0 +1,26 @@
+steps:
+  - name: gcr.io/cloud-builders/docker
+    env:
+      - DOCKER_BUILDKIT=1
+    args:
+      - build
+      - --build-arg
+      - NEXT_PUBLIC_SALEOR_API_URL=${_SALEOR_API_URL}
+      - --build-arg
+      - NEXT_PUBLIC_STOREFRONT_URL=${_STOREFRONT_URL}
+      - --build-arg
+      - NEXT_PUBLIC_DEFAULT_CHANNEL=default-channel
+      - -t
+      - us-central1-docker.pkg.dev/$PROJECT_ID/boto-storefront/boto-storefront:${_TAG}
+      - -t
+      - us-central1-docker.pkg.dev/$PROJECT_ID/boto-storefront/boto-storefront:latest
+      - .
+images:
+  - us-central1-docker.pkg.dev/$PROJECT_ID/boto-storefront/boto-storefront:${_TAG}
+  - us-central1-docker.pkg.dev/$PROJECT_ID/boto-storefront/boto-storefront:latest
+substitutions:
+  _TAG: latest
+  _SALEOR_API_URL: https://boto-saleor-api-5ri2tqwxva-uc.a.run.app/graphql/
+  _STOREFRONT_URL: https://boto-storefront-5ri2tqwxva-uc.a.run.app
+options:
+  logging: CLOUD_LOGGING_ONLY

@@ -1,0 +1,138 @@
+name: Deploy Storefront (Cloud Run)
+
+on:
+  push:
+    branches: [main, local-dev]
+    paths:
+      - "src/**"
+      - "public/**"
+      - "messages/**"
+      - "next.config.js"
+      - "package.json"
+      - "pnpm-lock.yaml"
+      - "Dockerfile"
+      - "deploy/**"
+      - ".github/workflows/deploy-cloudrun.yml"
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-boto-storefront-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+  id-token: write
+
+env:
+  # Dedicated BOTO project (independent of feed-me-qa / shared VM).
+  PROJECT_ID: boto-services
+  REGION: us-central1
+  SERVICE: boto-storefront
+  AR_REPO: boto-storefront
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: ${{ secrets.GCP_WORKLOAD_IDENTITY_PROVIDER }}
+          service_account: ${{ secrets.GCP_SERVICE_ACCOUNT }}
+
+      - uses: google-github-actions/setup-gcloud@v2
+
+      - name: Resolve service URLs
+        id: urls
+        run: |
+          API_URL="${{ vars.SALEOR_API_URL }}"
+          if [ -z "$API_URL" ]; then
+            API_URL="${{ secrets.SALEOR_API_URL }}"
+          fi
+          if [ -z "$API_URL" ]; then
+            echo "::error::Set SALEOR_API_URL variable or secret"
+            exit 1
+          fi
+          case "$API_URL" in
+            */graphql|*/graphql/) ;;
+            *) API_URL="${API_URL%/}/graphql/" ;;
+          esac
+          STOREFRONT_URL="${{ vars.STOREFRONT_URL }}"
+          if [ -z "$STOREFRONT_URL" ]; then
+            STOREFRONT_URL="${{ secrets.STOREFRONT_URL }}"
+          fi
+          if [ -z "$STOREFRONT_URL" ]; then
+            STOREFRONT_URL=$(gcloud run services describe "${{ env.SERVICE }}" \
+              --project="${{ env.PROJECT_ID }}" \
+              --region="${{ env.REGION }}" \
+              --format='value(status.url)' 2>/dev/null || true)
+          fi
+          echo "api_url=${API_URL}" >> "$GITHUB_OUTPUT"
+          echo "storefront_url=${STOREFRONT_URL}" >> "$GITHUB_OUTPUT"
+
+      - name: Configure Docker for Artifact Registry
+        run: gcloud auth configure-docker ${{ env.REGION }}-docker.pkg.dev --quiet
+
+      - name: Build and push image
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: Dockerfile
+          push: true
+          build-args: |
+            NEXT_PUBLIC_SALEOR_API_URL=${{ steps.urls.outputs.api_url }}
+            NEXT_PUBLIC_STOREFRONT_URL=${{ steps.urls.outputs.storefront_url }}
+            NEXT_PUBLIC_DEFAULT_CHANNEL=default-channel
+            NEXT_PUBLIC_ENABLE_STRIPE_PAYMENTS=false
+          tags: |
+            ${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.AR_REPO }}/boto-storefront:${{ github.sha }}
+            ${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.AR_REPO }}/boto-storefront:latest
+
+      - name: Deploy to Cloud Run
+        id: deploy
+        uses: google-github-actions/deploy-cloudrun@v2
+        with:
+          project_id: ${{ env.PROJECT_ID }}
+          service: ${{ env.SERVICE }}
+          region: ${{ env.REGION }}
+          image: ${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.AR_REPO }}/boto-storefront:${{ github.sha }}
+          flags: >-
+            --execution-environment=gen2
+            --port=8080
+            --memory=1Gi
+            --cpu=1
+            --concurrency=40
+            --cpu-boost
+            --min-instances=0
+            --max-instances=2
+            --timeout=300
+            --allow-unauthenticated
+            --set-env-vars=SALEOR_REQUEST_TIMEOUT_MS=45000
+
+      - name: Update STOREFRONT_URL after first deploy
+        if: steps.urls.outputs.storefront_url == ''
+        run: |
+          gcloud run services update "${{ env.SERVICE }}" \
+            --project="${{ env.PROJECT_ID }}" \
+            --region="${{ env.REGION }}" \
+            --update-env-vars="NEXT_PUBLIC_STOREFRONT_URL=${{ steps.deploy.outputs.url }}"
+
+      - name: Post-deploy smoke
+        if: steps.deploy.outcome == 'success'
+        run: |
+          URL="${{ steps.deploy.outputs.url }}"
+          if [ -z "$URL" ]; then
+            URL=$(gcloud run services describe "${{ env.SERVICE }}" \
+              --project="${{ env.PROJECT_ID }}" \
+              --region="${{ env.REGION }}" \
+              --format='value(status.url)')
+          fi
+          for i in 1 2 3 4 5 6 7 8 9 10; do
+            CODE=$(curl -fsS -o /dev/null -w '%{http_code}' "${URL}/en/default-channel/" || echo "000")
+            [[ "$CODE" = "200" ]] && exit 0
+            sleep 5
+          done
+          echo "Storefront smoke failed"
+          exit 1

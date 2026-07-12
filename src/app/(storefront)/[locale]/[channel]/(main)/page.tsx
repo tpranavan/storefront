@@ -1,4 +1,5 @@
 import { brandConfig } from "@/config/brand";
+import { normalizeSaleorMediaUrl, resolveProductThumbnailUrl } from "@/lib/images";
 import { resolveLocaleFromSlug } from "@/config/locale";
 import { getFeaturedProducts } from "@/lib/catalog/get-featured-products";
 import { resolveChannelCurrency } from "@/lib/channels/resolve-channel-currency";
@@ -24,8 +25,9 @@ const HERO_SLUG_HINT = /shoe|plimsoll|sneaker|trainer|runner|force|boot/i;
 type FeaturedProduct = Awaited<ReturnType<typeof getFeaturedProducts>>[number];
 
 function pickImage(product: FeaturedProduct | undefined) {
-	if (!product?.thumbnail?.url) return null;
-	return { url: product.thumbnail.url, alt: product.thumbnail.alt || product.name || "" };
+	const url = resolveProductThumbnailUrl(product?.thumbnail?.url, product?.media?.[0]?.id);
+	if (!url) return null;
+	return { url, alt: product?.thumbnail?.alt || product?.name || "" };
 }
 
 /**
@@ -41,7 +43,10 @@ function buildCategoryTiles(products: readonly FeaturedProduct[], max = 3): Cate
 		if (!category?.slug || seen.has(category.slug)) continue;
 		seen.add(category.slug);
 		const categoryName = category.translation?.name || category.name;
-		const image = category.backgroundImage?.url ?? product.thumbnail?.url ?? null;
+		const image =
+			normalizeSaleorMediaUrl(category.backgroundImage?.url) ??
+			resolveProductThumbnailUrl(product.thumbnail?.url, product.media?.[0]?.id) ??
+			null;
 		const imageAlt = category.backgroundImage?.alt || product.thumbnail?.alt || categoryName;
 		tiles.push({
 			title: categoryName,

@@ -52,8 +52,8 @@ export const defaultStorefrontContent = {
 			brandStory: {
 				heading: "Built for real commerce",
 				paragraphs: [
-					"Paper is a minimal, production-ready storefront for Saleor — clean as a blank page, built to ship.",
-					"Customize sections in code, connect your catalog, and keep checkout, cart, and product pages battle-tested out of the box.",
+					"BOTO is built for real commerce — curated products, a smooth checkout, and a storefront designed to convert.",
+					"Discover our collection and experience quality you can trust from browse to delivery.",
 				],
 			},
 			values: {

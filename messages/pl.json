@@ -575,7 +575,7 @@
 		},
 		"gateways": {
 			"noneTitle": "Brak skonfigurowanej bramki płatności",
-			"noneBody": "Aby przyjmować płatności, zainstaluj aplikację płatności (np. Saleor Dummy Payment do testów lub Stripe/Adyen do produkcji) w panelu Saleor.",
+			"noneBody": "Aby przyjmować płatności, zainstaluj aplikację płatności (np. BOTO Dummy Payment do testów lub Stripe/Adyen do produkcji) w panelu Saleor.",
 			"unsupportedTitle": "Niewspierana bramka płatności",
 			"unsupportedList": "Ta kasa nie obsługuje dostępnych bramek płatności: {gateways}.",
 			"unsupportedEmpty": "Brak obsługiwanej bramki płatności dla tego zamówienia.",

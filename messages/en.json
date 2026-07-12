@@ -532,7 +532,7 @@
 			"channelUnresolved": "Could not resolve checkout channel after payment. Please contact support.",
 			"unexpectedError": "An unexpected error occurred while completing your payment.",
 			"stripeConfigFailed": "Stripe gateway configuration failed",
-			"stripeKeyMissing": "Stripe publishable key is missing. Check Stripe app configuration in Saleor Dashboard.",
+			"stripeKeyMissing": "Stripe publishable key is missing. Check Stripe app configuration in BOTO Dashboard.",
 			"dummyGateway": "Dummy Payment",
 			"failed": "Payment failed",
 			"interruptedBeforeCharge": "Payment was interrupted before you were charged. You can safely try again.",
@@ -558,7 +558,7 @@
 			"marketingSaveFailed": "Failed to save marketing preference",
 			"invalidRedirectUrl": "Invalid redirect URL",
 			"createAccountFailed": "Failed to create account",
-			"noSaleorResponse": "No response from Saleor",
+			"noSaleorResponse": "No response from BOTO",
 			"shippingMethodsFailed": "Failed to load shipping methods",
 			"gatewayInitFailed": "Payment gateway initialization failed",
 			"totalVerifyFailed": "Could not verify the checkout total. Please try again.",
@@ -575,18 +575,18 @@
 		},
 		"gateways": {
 			"noneTitle": "No payment gateway configured",
-			"noneBody": "To accept payments, install a payment app (like Saleor Dummy Payment for testing, or Stripe/Adyen for production) from the Saleor Dashboard.",
+			"noneBody": "To accept payments, install a payment app (like BOTO Dummy Payment for testing, or Stripe/Adyen for production) from the BOTO Dashboard.",
 			"unsupportedTitle": "Unsupported payment gateway",
 			"unsupportedList": "This checkout does not support the available payment gateway(s): {gateways}.",
 			"unsupportedEmpty": "No supported payment gateway is available for this checkout.",
 			"dummyMissingTitle": "Dummy Payment not available on this checkout",
-			"dummyMissingBody": "Dummy Payment App is installed, but it is not available for this checkout. In Saleor Dashboard, check the app is active, webhooks are delivering successfully, and the checkout currency is supported (USD for the hosted app).",
-			"noGatewayConfigured": "No payment gateway configured. Please contact support or configure a payment app in Saleor.",
+			"dummyMissingBody": "Dummy Payment App is installed, but it is not available for this checkout. In BOTO Dashboard, check the app is active, webhooks are delivering successfully, and the checkout currency is supported (USD for the hosted app).",
+			"noGatewayConfigured": "No payment gateway configured. Please contact support or configure a payment app in BOTO.",
 			"stripeUseCardForm": "Stripe payment is handled by the card form. Complete payment using the Stripe payment section above.",
 			"paymentFailed": "Payment failed",
 			"paymentTryAgain": "Payment failed. Please try again.",
-			"paymentWebhookFailed": "Payment app webhook failed. In Saleor Dashboard → Apps → Dummy Payment App, check webhook deliveries are succeeding.",
-			"paymentInitFailed": "Payment could not be initialized. Check that the payment app is running in Saleor."
+			"paymentWebhookFailed": "Payment app webhook failed. In BOTO Dashboard → Apps → Dummy Payment App, check webhook deliveries are succeeding.",
+			"paymentInitFailed": "Payment could not be initialized. Check that the payment app is running in BOTO."
 		}
 	}
 }

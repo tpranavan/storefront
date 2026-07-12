@@ -23,7 +23,7 @@ import { useVariantOptionLabels } from "@/ui/components/pdp/use-variant-option-l
  * - Combinatorial explosion for products with many variants
  * - Inconsistent UX compared to attribute-based selectors
  *
- * Consider configuring proper variant attributes in Saleor Dashboard
+ * Consider configuring proper variant attributes in BOTO Dashboard
  * for a better customer experience.
  */
 

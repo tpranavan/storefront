@@ -7,6 +7,7 @@ import { calculateDiscountPercent, hasDiscount, hasDiscountInPriceRange } from "
 import { buildStorefrontPath } from "@/lib/storefront-path";
 import { pickTranslatedName } from "@/lib/saleor-translations";
 import { isBestseller } from "@/lib/catalog/product-flags";
+import { normalizeSaleorMediaUrl, resolveProductThumbnailUrl } from "@/lib/images";
 
 /**
  * Extract colors from product variants
@@ -95,7 +96,7 @@ export function toProductCardData(
 		compareAtPrice: isSale ? undiscountedStartAmount : null,
 		discountPercent,
 		currency: startPrice?.currency ?? localeConfig.fallbackCurrency,
-		image: product.thumbnail?.url ?? "/placeholder.svg",
+		image: resolveProductThumbnailUrl(product.thumbnail?.url, product.media?.[0]?.id) ?? "/placeholder.svg",
 		imageAlt: product.thumbnail?.alt ?? productName,
 		hoverImage: null, // Would need additional media in fragment
 		localeBcp47: resolveLocaleFromSlug(locale).bcp47,

@@ -71,7 +71,7 @@ describe("findMatchingVariant", () => {
 				name: "Hoodie / M",
 				quantityAvailable: 5,
 				selectionAttributes: [
-					{ attribute: { slug: "brand", name: "Brand" }, values: [{ name: "Saleor" }] },
+					{ attribute: { slug: "brand", name: "Brand" }, values: [{ name: "BOTO" }] },
 					{ attribute: { slug: "size", name: "Size" }, values: [{ name: "M" }] },
 				],
 			},
@@ -80,7 +80,7 @@ describe("findMatchingVariant", () => {
 				name: "Hoodie / L",
 				quantityAvailable: 5,
 				selectionAttributes: [
-					{ attribute: { slug: "brand", name: "Brand" }, values: [{ name: "Saleor" }] },
+					{ attribute: { slug: "brand", name: "Brand" }, values: [{ name: "BOTO" }] },
 					{ attribute: { slug: "size", name: "Size" }, values: [{ name: "L" }] },
 				],
 			},
@@ -88,7 +88,7 @@ describe("findMatchingVariant", () => {
 		const groups = groupVariantsByAttributes(variants);
 
 		expect(getInteractiveAttributeGroups(groups).map((g) => g.slug)).toEqual(["size"]);
-		expect(getImplicitSelections(groups)).toEqual({ brand: "saleor" });
+		expect(getImplicitSelections(groups)).toEqual({ brand: "boto" });
 		expect(findMatchingVariant(variants, { size: "m" }, groups)).toBe("hoodie-m");
 	});
 });

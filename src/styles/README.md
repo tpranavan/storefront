@@ -21,7 +21,7 @@ Copy and metadata (site name, tagline) live in `src/config/brand.ts`.
 | Colors, radius, inverted footer tones | `src/styles/brand.css`                                        |
 | Typography scale (fluid sizes)        | `src/styles/brand.css` + `tailwind.config.cjs` (see below)    |
 | Site name, tagline, copyright, social | `src/config/brand.ts`                                         |
-| Logo                                  | `public/logo.svg`, `public/logo-dark.svg` (inverted surfaces) |
+| Logo                                  | `public/logo.png`, `public/logo-dark.png` (inverted surfaces) |
 | Favicons                              | `public/favicon*`                                             |
 | OG image hex colors                   | `src/lib/seo/og-brand-colors.ts` (sync with `brand.css`)      |
 

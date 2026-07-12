@@ -575,7 +575,7 @@
 		},
 		"gateways": {
 			"noneTitle": "Maksuyhdyskäytävää ei ole määritetty",
-			"noneBody": "Hyväksyäksesi maksuja, asenna maksusovellus (esim. Saleor Dummy Payment testaukseen tai Stripe/Adyen tuotantoon) Saleor-hallintapaneelista.",
+			"noneBody": "Hyväksyäksesi maksuja, asenna maksusovellus (esim. BOTO Dummy Payment testaukseen tai Stripe/Adyen tuotantoon) Saleor-hallintapaneelista.",
 			"unsupportedTitle": "Ei-tuettu maksuyhdyskäytävä",
 			"unsupportedList": "Tämä kassa ei tue saatavilla olevia maksuyhdyskäytäviä: {gateways}.",
 			"unsupportedEmpty": "Tälle kassalle ei ole saatavilla tuettua maksuyhdyskäytävää.",

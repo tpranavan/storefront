@@ -3,6 +3,61 @@
  * Keeps `sizes` aligned with layout breakpoints so the optimizer requests appropriately sized variants.
  */
 
+const LOCAL_SALEOR_HOSTS = new Set(["localhost", "127.0.0.1"]);
+const STALE_DIRECT_THUMBNAIL = /\/media\/thumbnails\//;
+
+function getSaleorApiOrigin(): string | null {
+	const apiUrl = process.env.NEXT_PUBLIC_SALEOR_API_URL;
+	if (!apiUrl) return null;
+	try {
+		return new URL(apiUrl.replace(/\/graphql\/?$/, "/")).origin;
+	} catch {
+		return null;
+	}
+}
+
+/**
+ * Rewrite Saleor media/thumbnail URLs that still point at a local API host.
+ * Cloud Next.js image optimization blocks private IPs; stale "use cache" entries
+ * can retain localhost URLs from when PUBLIC_URL was wrong during seed/build.
+ */
+export function normalizeSaleorMediaUrl(url: string | null | undefined): string | null {
+	if (!url) return null;
+
+	try {
+		const parsed = new URL(url);
+		if (!LOCAL_SALEOR_HOSTS.has(parsed.hostname)) return url;
+
+		const apiOrigin = getSaleorApiOrigin();
+		if (!apiOrigin) return url;
+
+		return `${apiOrigin}${parsed.pathname}${parsed.search}`;
+	} catch {
+		return url;
+	}
+}
+
+/**
+ * Product thumbnails can be cached as direct `/media/thumbnails/...` URLs while the
+ * backing file is missing (stale Thumbnail rows). Prefer the on-demand proxy URL.
+ */
+export function resolveProductThumbnailUrl(
+	url: string | null | undefined,
+	productMediaId: string | null | undefined,
+	size = 1024,
+	format: "webp" | "avif" | null = "webp",
+): string | null {
+	const normalized = normalizeSaleorMediaUrl(url);
+	if (!normalized) return null;
+	if (!productMediaId || !STALE_DIRECT_THUMBNAIL.test(normalized)) return normalized;
+
+	const apiOrigin = getSaleorApiOrigin();
+	if (!apiOrigin) return normalized;
+
+	const formatSuffix = format ? `${format}/` : "";
+	return `${apiOrigin}/thumbnail/${productMediaId}/${size}/${formatSuffix}`;
+}
+
 /**
  * Homepage featured collection grid: 2 col → 4 col (lg).
  * Pair with ProductGrid desktopColumns={4}.

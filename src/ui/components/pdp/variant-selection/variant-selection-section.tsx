@@ -166,7 +166,7 @@ export function VariantSelectionSection({
 			console.warn(
 				`[VariantSelectionSection] Product "${productSlug}" has ${variants.length} variants but no structured attributes. ` +
 					`Using name-based fallback selector. For better UX (color swatches, size pills, cross-filtering), ` +
-					`configure variant attributes in Saleor Dashboard.`,
+					`configure variant attributes in BOTO Dashboard.`,
 			);
 		}
 	}, [attributeGroups.length, variants.length, productSlug]);

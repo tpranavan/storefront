@@ -532,7 +532,7 @@
 			"channelUnresolved": "Kunne ikke fastslå kassekanal etter betaling. Kontakt kundestøtte.",
 			"unexpectedError": "En uventet feil oppstod under fullføring av betalingen.",
 			"stripeConfigFailed": "Stripe-gateway-konfigurasjon mislyktes",
-			"stripeKeyMissing": "Stripe publiserbar nøkkel mangler. Sjekk Stripe-appkonfigurasjonen i Saleor Dashboard.",
+			"stripeKeyMissing": "Stripe publiserbar nøkkel mangler. Sjekk Stripe-appkonfigurasjonen i BOTO Dashboard.",
 			"dummyGateway": "Testbetaling",
 			"failed": "Betaling mislyktes",
 			"interruptedBeforeCharge": "Betalingen ble avbrutt før du ble belastet. Du kan trygt prøve igjen.",
@@ -575,17 +575,17 @@
 		},
 		"gateways": {
 			"noneTitle": "Ingen betalingsgateway konfigurert",
-			"noneBody": "For å ta imot betalinger, installer en betalingsapp (som Saleor Dummy Payment for testing, eller Stripe/Adyen for produksjon) fra Saleor Dashboard.",
+			"noneBody": "For å ta imot betalinger, installer en betalingsapp (som BOTO Dummy Payment for testing, eller Stripe/Adyen for produksjon) fra BOTO Dashboard.",
 			"unsupportedTitle": "Betalingsgateway støttes ikke",
 			"unsupportedList": "Denne kassen støtter ikke de tilgjengelige betalingsgatewayene: {gateways}.",
 			"unsupportedEmpty": "Ingen støttet betalingsgateway er tilgjengelig for denne kassen.",
 			"dummyMissingTitle": "Dummy Payment er ikke tilgjengelig for denne kassen",
-			"dummyMissingBody": "Dummy Payment-appen er installert, men er ikke tilgjengelig for denne kassen. I Saleor Dashboard, sjekk at appen er aktiv, webhooks leveres, og kassevalutaen støttes (USD for den hostede appen).",
+			"dummyMissingBody": "Dummy Payment-appen er installert, men er ikke tilgjengelig for denne kassen. I BOTO Dashboard, sjekk at appen er aktiv, webhooks leveres, og kassevalutaen støttes (USD for den hostede appen).",
 			"noGatewayConfigured": "Ingen betalingsgateway konfigurert. Kontakt kundestøtte eller konfigurer en betalingsapp i Saleor.",
 			"stripeUseCardForm": "Stripe-betaling håndteres via kortskjemaet. Fullfør betalingen i Stripe-seksjonen over.",
 			"paymentFailed": "Betaling mislyktes",
 			"paymentTryAgain": "Betaling mislyktes. Prøv igjen.",
-			"paymentWebhookFailed": "Webhook for betalingsappen mislyktes. I Saleor Dashboard → Apps → Dummy Payment App, sjekk at webhook-leveranser lykkes.",
+			"paymentWebhookFailed": "Webhook for betalingsappen mislyktes. I BOTO Dashboard → Apps → Dummy Payment App, sjekk at webhook-leveranser lykkes.",
 			"paymentInitFailed": "Betalingen kunne ikke initialiseres. Sjekk at betalingsappen kjører i Saleor."
 		}
 	}

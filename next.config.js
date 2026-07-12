@@ -27,7 +27,33 @@ const config = {
 	images: {
 		// WebP only: AVIF cold-encodes add ~500ms+ to first /_next/image hit on Vercel (hurts LCP).
 		formats: ["image/webp"],
+		// Next 16 blocks localhost upstreams unless this is set (dev only — SSRF risk in prod).
+		dangerouslyAllowLocalIP: process.env.NODE_ENV === "development",
 		remotePatterns: [
+			{
+				// Local Saleor API (dev) — wildcard "*" does not cover localhost in Next 16
+				protocol: "http",
+				hostname: "localhost",
+				port: "8000",
+				pathname: "/**",
+			},
+			{
+				protocol: "http",
+				hostname: "127.0.0.1",
+				port: "8000",
+				pathname: "/**",
+			},
+			{
+				// BOTO Cloud Run API + GCS media
+				protocol: "https",
+				hostname: "*.run.app",
+				pathname: "/**",
+			},
+			{
+				protocol: "https",
+				hostname: "storage.googleapis.com",
+				pathname: "/**",
+			},
 			{
 				// Saleor Cloud CDN
 				hostname: "*.saleor.cloud",
@@ -35,10 +61,6 @@ const config = {
 			{
 				// Saleor Media (common pattern)
 				hostname: "*.media.saleor.cloud",
-			},
-			{
-				// Allow all hostnames in development (restrict in production)
-				hostname: "*",
 			},
 		],
 	},

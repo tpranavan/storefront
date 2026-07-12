@@ -264,7 +264,7 @@ async function fetchWithRetry(
 				continue;
 			}
 			return networkError(
-				`${operationName}: ${isTimeout ? "Request timed out" : "Failed to connect to Saleor API"}`,
+				`${operationName}: ${isTimeout ? "Request timed out" : "Failed to connect to BOTO API"}`,
 				error,
 			);
 		}

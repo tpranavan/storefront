@@ -14,7 +14,7 @@ export async function getFeaturedProducts(
 	collectionSlug = "featured-products",
 ) {
 	"use cache";
-	applyCacheProfile(CACHE_PROFILES.collections, collectionSlug);
+	applyCacheProfile(CACHE_PROFILES.collections, `${collectionSlug}:thumb-proxy-v1`);
 
 	const result = await executePublicGraphQL(ProductListByCollectionDocument, {
 		variables: {
@@ -31,5 +31,7 @@ export async function getFeaturedProducts(
 		return [];
 	}
 
-	return result.data.collection?.products?.edges.map(({ node }) => node) ?? [];
+	const products = result.data.collection?.products?.edges.map(({ node }) => node) ?? [];
+
+	return products;
 }
